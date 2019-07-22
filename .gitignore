@@ -1,0 +1,45 @@
+# big files
+data/VOT2018
+data/OTB2015
+trackers/SiamRPN/model.pth
+trackers/SiamMask/model.pth
+trackers/SiamRPN_PP/model.pth
+trackers/SiamRPN_PP/model_otb.pth
+
+# benchmark result files
+benchmark/results/VOT2018
+benchmark/results/OTB2015
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version

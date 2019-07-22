@@ -1,0 +1,32 @@
+{
+    "tracker": {
+      "window_influence": 0.42,
+      "instance_size": 255,
+      "base_size": 8,
+      "out_size": 127,
+      "seg_thr": 0.3,
+      "penalty_k": 0.04,
+      "lr": 0.25
+    },
+    "anchors":{
+      "stride": 8,
+      "ratios": [0.33, 0.5, 1, 2, 3],
+			"scales": [8],
+			"round_dight": 0
+		},
+    "THOR": {
+      "K_st": 0,
+      "K_lt": 1,
+      "iou_tresh": 1.0,
+      "lb": 1.0,
+      "tukey_alpha": 0,
+      "dilation": 1000,
+      "lb_type": "static",
+      "modulate": false,
+      "context_temp": 0.5,
+      "viz": false,
+      "verbose": false,
+      "vanilla": true
+    }
+}
+

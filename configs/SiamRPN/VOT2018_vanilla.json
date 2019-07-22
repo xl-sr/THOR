@@ -1,0 +1,22 @@
+{
+    "tracker": {
+      "penalty_k": 0.055,
+      "window_influence": 0.42,
+      "lr": 0.295
+    },
+    "THOR": {
+      "K_st": 0,
+      "K_lt": 1,
+      "iou_tresh": 1.0,
+      "lb": 1.0,
+      "tukey_alpha": 0,
+      "dilation": 1000,
+      "lb_type": "static",
+      "modulate": false,
+      "context_temp": 0.5,
+      "viz": false,
+      "verbose": false,
+      "vanilla": true
+    }
+}
+
