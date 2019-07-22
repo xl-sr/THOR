@@ -70,7 +70,7 @@ bash get_test_data.sh
 
 ## Reproduce the benchmark results
 <p align="center">
-  <img src="misc/THOR_bench_performance.png" width="800">
+  <img src="misc/THOR_bench_performance.png" width="1641">
 </p>
 
 To reproduce the benchmark results from the paper run for example:
