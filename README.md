@@ -1,5 +1,8 @@
 # Tracking Holistic Object Representations #
-#### in BMVC 2019 [[PDF]](https://arxiv.org/pdf/1907.12920.pdf) [[Video]](https://www.youtube.com/watch?v=EAv7SvI3EH0&feature=youtu.be) [[Website]](https://sites.google.com/view/vision-thor/)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tracking-holistic-object-representations/visual-object-tracking-on-vot201718)](https://paperswithcode.com/sota/visual-object-tracking-on-vot201718?p=tracking-holistic-object-representations)
+
+#### in BMVC 2019 [[PDF]](https://arxiv.org/pdf/1907.12920.pdf) [[Video]](https://www.youtube.com/watch?v=EAv7SvI3EH0&feature=youtu.be) [[Project]](https://sites.google.com/view/vision-thor/)
 
 [Axel Sauer*](https://www.msrm.tum.de/rsi/team/wissenschaftliche-mitarbeiter/sauer-axel/),
 [Elie Aljalbout*](https://www.msrm.tum.de/rsi/team/wissenschaftliche-mitarbeiter/aljalbout-elie/),
