@@ -4,7 +4,7 @@
 
 #### in BMVC 2019 [[PDF]](https://arxiv.org/pdf/1907.12920.pdf) [[Video]](https://www.youtube.com/watch?v=EAv7SvI3EH0&feature=youtu.be) [[Project]](https://sites.google.com/view/vision-thor/)
 
-[Axel Sauer*](https://www.msrm.tum.de/rsi/team/wissenschaftliche-mitarbeiter/sauer-axel/),
+[Axel Sauer*](https://axelsauer.com/),
 [Elie Aljalbout*](https://www.msrm.tum.de/rsi/team/wissenschaftliche-mitarbeiter/aljalbout-elie/),
 [Sami Haddadin](https://www.msrm.tum.de/rsi/team/professor/)
 
