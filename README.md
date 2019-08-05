@@ -67,7 +67,7 @@ mv SiamMask_VOT.pth trackers/SiamMask/model.pth
 ## Get the Datasets
 Run the download script to get the [OTB2015](http://cvlab.hanyang.ac.kr/tracker_benchmark/benchmark_v10.html) and [VOT2018](http://www.votchallenge.net/vot2018/) datasets
 ```
-cd data/
+mkdir data && cd data/
 bash get_test_data.sh
 ```
 
