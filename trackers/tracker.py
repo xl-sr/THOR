@@ -23,7 +23,9 @@ from trackers.SiamMask.siammask import SiamMask_init, SiamMask_track
 from trackers.SiamMask.utils.load_helper import load_pretrain
 
 class Tracker():
-    def __init__(self):
+    def __init__(self):  
+        use_cuda = torch.cuda.is_available()
+        self.device = torch.device("cuda" if use_cuda else "cpu")
         self.mask = False
         self.temp_mem = None
 
@@ -52,7 +54,7 @@ class SiamFC_Tracker(Tracker):
         model_path = dirname(abspath(__file__)) + '/SiamFC/model.pth'
         model = SiamFC()
         model.load_state_dict(torch.load(model_path))
-        self.model = model.eval().cuda()
+        self.model = model.eval().to(self.device)
 
         # set up template memory
         self.temp_mem = THOR_SiamFC(cfg=cfg['THOR'], net=self.model)
@@ -72,7 +74,7 @@ class SiamRPN_Tracker(Tracker):
         model_path = dirname(abspath(__file__)) + '/SiamRPN/model.pth'
         model = SiamRPN()
         model.load_state_dict(torch.load(model_path))
-        self.model = model.eval().cuda()
+        self.model = model.eval().to(self.device)
 
         # set up template memory
         self.temp_mem = THOR_SiamRPN(cfg=cfg['THOR'], net=self.model)
@@ -93,7 +95,7 @@ class SiamMask_Tracker(Tracker):
         model_path = dirname(abspath(__file__)) + '/SiamMask/model.pth'
         model = SiamMaskCustom(anchors=cfg['anchors'])
         model = load_pretrain(model, model_path)
-        self.model = model.eval().cuda()
+        self.model = model.eval().to(self.device)
 
         # set up template memory
         self.temp_mem = THOR_SiamMask(cfg=cfg['THOR'], net=self.model)

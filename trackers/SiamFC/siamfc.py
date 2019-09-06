@@ -40,6 +40,7 @@ def SiamFC_init(im, target_pos, target_sz, cfg):
     target_pos, target_sz = to_one_indexed(target_pos, target_sz)
 
     # fill the state dict
+    state['device'] = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     state['target_pos'] = target_pos
     state['target_sz'] = target_sz
     state['score'] = 1.0
@@ -53,6 +54,7 @@ def SiamFC_track(state, im, temp_mem):
     inst_sz = p.instance_sz
     scale_factors = p.scale_factors
     old_pos, old_sz = to_zero_indexed(state['target_pos'], state['target_sz'])
+    dev = state['device']
 
     # get instance images
     ims = [crop_and_resize(
@@ -60,7 +62,7 @@ def SiamFC_track(state, im, temp_mem):
         out_size=inst_sz,
         pad_color=avg_chans) for f in scale_factors]
     ims = np.stack(ims, axis=0)
-    ims = torch.from_numpy(ims).cuda().permute([0, 3, 1, 2]).float()
+    ims = torch.from_numpy(ims).to(dev).permute([0, 3, 1, 2]).float()
 
     # track
     target_pos, target_sz, score, scale = temp_mem.batch_evaluate(ims, old_pos, old_sz, p)

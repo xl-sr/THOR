@@ -47,6 +47,8 @@ def SiamMask_init(im, target_pos, target_sz, model, hp=None):
         window = np.ones((p.score_size, p.score_size))
     window = np.tile(window.flatten(), p.anchor_num)
 
+    use_cuda = torch.cuda.is_available()
+    state['device'] = torch.device("cuda" if use_cuda else "cpu")
     state['p'] = p
     state['model'] = model
     state['avg_chans'] = avg_chans
@@ -62,6 +64,7 @@ def SiamMask_track(state, im, temp_mem):
     window = state['window']
     old_pos = state['target_pos']
     old_sz = state['target_sz']
+    dev = state['device']
 
     # get search area
     wc_x = old_sz[1] + p.context_amount * sum(old_sz)
@@ -78,14 +81,14 @@ def SiamMask_track(state, im, temp_mem):
     x_crop = Variable(get_subwindow_tracking(im, old_pos, p.instance_size, round(s_x), avg_chans).unsqueeze(0))
 
     # track
-    target_pos, target_sz, score, best_id = temp_mem.batch_evaluate(x_crop.cuda(), old_pos,
+    target_pos, target_sz, score, best_id = temp_mem.batch_evaluate(x_crop.to(dev), old_pos,
                                                                 old_sz, window,
                                                                 scale_x, p)
 
     # mask refinement
     best_pscore_id_mask = np.unravel_index(best_id, (5, p.score_size, p.score_size))
     delta_x, delta_y = best_pscore_id_mask[2], best_pscore_id_mask[1]
-    mask = state['model'].track_refine((delta_y, delta_x)).cuda().sigmoid().squeeze().view(
+    mask = state['model'].track_refine((delta_y, delta_x)).to(dev).sigmoid().squeeze().view(
         p.out_size, p.out_size).cpu().data.numpy()
 
     def crop_back(image, bbox, out_sz, padding=-1):

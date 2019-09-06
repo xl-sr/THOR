@@ -6,6 +6,7 @@
 # --------------------------------------------------------
 
 import numpy as np
+import torch
 from torch.autograd import Variable
 import torch.nn.functional as F
 from ipdb import set_trace
@@ -34,6 +35,7 @@ def SiamRPN_init(im, target_pos, target_sz, cfg):
     window = np.outer(np.hanning(p.score_size), np.hanning(p.score_size))
     window = np.tile(window.flatten(), p.anchor_num)
 
+    state['device'] = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     state['p'] = p
     state['avg_chans'] = avg_chans
     state['window'] = window
@@ -48,6 +50,7 @@ def SiamRPN_track(state, im, temp_mem):
     window = state['window']
     old_pos = state['target_pos']
     old_sz = state['target_sz']
+    dev = state['device']
 
     wc_z = old_sz[1] + p.context_amount * sum(old_sz)
     hc_z = old_sz[0] + p.context_amount * sum(old_sz)
@@ -64,7 +67,7 @@ def SiamRPN_track(state, im, temp_mem):
                                              round(s_x), avg_chans).unsqueeze(0))
 
     # track
-    target_pos, target_sz, score = temp_mem.batch_evaluate(x_crop.cuda(), old_pos, old_sz * scale_z, window, scale_z, p)
+    target_pos, target_sz, score = temp_mem.batch_evaluate(x_crop.to(dev), old_pos, old_sz * scale_z, window, scale_z, p)
 
     target_pos[0] = max(0, min(state['im_w'], target_pos[0]))
     target_pos[1] = max(0, min(state['im_h'], target_pos[1]))

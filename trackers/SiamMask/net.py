@@ -21,14 +21,6 @@ class SiamMask(nn.Module):
         self.g_sz = g_sz
         self.all_anchors = None
 
-    def set_all_anchors(self, image_center, size):
-        # cx,cy,w,h
-        if not self.anchor.generate_all_anchors(image_center, size):
-            return
-        all_anchors = self.anchor.all_anchors[1]  # cx, cy, w, h
-        self.all_anchors = torch.from_numpy(all_anchors).float().cuda()
-        self.all_anchors = [self.all_anchors[i] for i in range(4)]
-
     def feature_extractor(self, x):
         return self.features(x)
 
