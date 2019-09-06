@@ -50,6 +50,7 @@ dependencies:
     - decorator==4.4.0
     - fire==0.1.3
     - got10k==0.1.3
+    - imutils==0.5.3
     - ipdb==0.12
     - ipython==7.5.0
     - ipython-genutils==0.2.0
