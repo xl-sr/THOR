@@ -73,7 +73,8 @@ class SiamRPN_Tracker(Tracker):
         # setting up the model
         model_path = dirname(abspath(__file__)) + '/SiamRPN/model.pth'
         model = SiamRPN()
-        model.load_state_dict(torch.load(model_path))
+        model.load_state_dict(torch.load(model_path, map_location=('cpu'
+                   if str(self.device) == 'cpu' else None)))
         self.model = model.eval().to(self.device)
 
         # set up template memory
