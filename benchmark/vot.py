@@ -25,7 +25,7 @@ def test_vot(v_id, tracker, video, args):
             target_pos = np.array([cx, cy])
             target_sz = np.array([w, h])
 
-            state = tracker.setup(im, target_pos, target_sz, f)
+            state = tracker.setup(im, target_pos, target_sz)
 
             location = cxy_wh_2_rect(state['target_pos'], state['target_sz'])
             regions.append(1)

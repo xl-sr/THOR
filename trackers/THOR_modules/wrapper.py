@@ -27,12 +27,13 @@ class THOR_Wrapper():
         self._mem_len_total = self._cfg.K_st + self._cfg.K_lt
         assert self._cfg.K_lt > 0
 
+        self.do_full_init = True
         self._net = net
         self._curr_type = 'lt'
         self.score_viz = None
         self.template_keys = ['im', 'raw', 'kernel', 'compare']
 
-    def setup(self, im, pos, sz, f):
+    def setup(self, im, pos, sz):
         """
         initialize the short-term and long-term module
         """
@@ -53,11 +54,12 @@ class THOR_Wrapper():
         self.st_module.fill(temp)
 
         # initialize the long term module
-        if not f or self._cfg.vanilla:
+        if self.do_full_init or self._cfg.vanilla:
             self.lt_module = LT_Module(K=self._cfg.K_lt, template_keys=self.template_keys,
                                        lb=self._cfg.lb, lb_type=self._cfg.lb_type,
                                        verbose=self._cfg.verbose, viz=self._cfg.viz)
             self.lt_module.fill(temp)
+            self.do_full_init = False
         else:
             # reinitialize long term only at the beginning of the episode
             self.lt_module.update(temp, div_scale=0)

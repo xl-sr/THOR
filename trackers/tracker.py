@@ -23,7 +23,7 @@ from trackers.SiamMask.siammask import SiamMask_init, SiamMask_track
 from trackers.SiamMask.utils.load_helper import load_pretrain
 
 class Tracker():
-    def __init__(self):  
+    def __init__(self):
         use_cuda = torch.cuda.is_available()
         self.device = torch.device("cuda" if use_cuda else "cpu")
         self.mask = False
@@ -35,9 +35,9 @@ class Tracker():
     def track_func(self, state, im):
         raise NotImplementedError
 
-    def setup(self, im, target_pos, target_sz, f=0):
+    def setup(self, im, target_pos, target_sz):
         state = self.init_func(im, target_pos, target_sz)
-        self.temp_mem.setup(im, target_pos, target_sz, f)
+        self.temp_mem.setup(im, target_pos, target_sz)
         return state
 
     def track(self, im, state):

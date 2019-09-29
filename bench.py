@@ -75,6 +75,7 @@ def run_bench(delete_after=False):
     total_lost = 0
     speed_list = []
     for v_id, video in enumerate(dataset.keys(), start=1):
+        tracker.temp_mem.do_full_init = True
         speed = test_bench(v_id, tracker, dataset[video], args)
         speed_list.append(speed)
 
